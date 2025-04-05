@@ -42,6 +42,7 @@ const plans: PriceType[] = [
   },
 ];
 
+// function of the card
 const PricingCard = ({
     name,
     price,
