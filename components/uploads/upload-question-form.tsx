@@ -1,12 +1,11 @@
 "use client"
 import {z} from "zod"
-import UploadFormInputs from "./upload-form-inputs"
+import UploadQuestionInputs from "./upload-question-inputs"
 import { toast } from "sonner";
-import { generatePdfSummary } from "@/actions/upload-actions";
+
 // will get dispalyed in upload/page.tsx section
 // main upload form
 
-//function and main working , under the hood of pdf and extracting ait and applyinng all api powerd prompts.
 import { useUploadThing } from "@/utils/uploadthing"
 const schema= z.object({
     file: z.instanceof(File,{message:'Invalid File'}).refine((file)=>file.size
@@ -16,9 +15,9 @@ const schema= z.object({
 
 
 // after uploading checking function under the hood.
-export default  function UploadForm(){
-    //hook1 - toast -- UI enhancer.
-    //hook2 -useUploadThing()-- uplaod the pdf.
+export default  function UploadQuestionForm(){
+    //hook1 - toast
+    //hook2 
     const { startUpload, routeConfig } = useUploadThing("pdfUploader", {
         onClientUploadComplete: () => {
           console.log("uploaded successfully!");
@@ -53,8 +52,9 @@ export default  function UploadForm(){
         }
     toast("Uploading PDF",{description:"Hang tight! We are uploading your PDF"});
 
-    //Step 1 - uplaodthing
+
     //Upload The file to uploading-thing
+
     const resp = await startUpload([file]);
     if (!resp){
 
@@ -64,15 +64,9 @@ export default  function UploadForm(){
 
        toast("Processing PDF",{description:"Hang tight! Our AI is reading through your document"});
 
-    //Step 2: LangChain
-    //parse the pdf using lang chain
-    const summary= await generatePdfSummary(resp);
-    console.log({summary});
-
-    //STEP 3 - chatGpr /gemmini for summarize the pdf.
-    //summarize the pdf using ai
-
     
+    //parse the pdf using lang chain
+    //summarize the pdf using ai
     //save the summary to the database
     //redirect to the [id] summary page
 
@@ -83,8 +77,7 @@ export default  function UploadForm(){
 
 
     //Dsipaly part 
-    // main rendered part
     return <div className="flex flex-col gap-8 w-full max-w-2xl mx-auto">
-         <UploadFormInputs onSubmit={handleSubmit}></UploadFormInputs> 
+         <UploadQuestionInputs onSubmit={handleSubmit}></UploadQuestionInputs> 
     </div>
 }

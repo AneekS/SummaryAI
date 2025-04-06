@@ -9,8 +9,11 @@ import { text } from "stream/consumers";
 //additional hover effect, multiple used time.
 // My own custom made LINK with wrapups.
 //under the  hood Native Link is used.
-export const NavLink = ({ href, children ,className }: { href: string; children: React.ReactNode ,className?: string }) => {  const pathname = usePathname();
+export const NavLink = ({ href, children ,className }: { href: string; children: React.ReactNode ,className?: string }) => {  
+
+    const pathname = usePathname();
     //return current route
+    
     const isActive = pathname===href || (href !== '/' && pathname.startsWith(href));   
     
     //main functionalty 

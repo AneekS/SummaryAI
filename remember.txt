@@ -1,3 +1,28 @@
-File Uploads and API routes.
-useFileupload handler and hook,
-uploadThing API
+1.  PDF upload via uploadthing via Next.js
+        File Uploads and API routes.
+        useFileupload handler and hook,
+        uploadThing API
+        *follwed the steps via next.js installation guid and procedures.
+        *upload PDf file and get v=contenst extracted out.
+
+                *utils/uploadthing.ts
+                ///// BASICALLY uploading va uploadThing
+
+2.  (UI enhanced)use of TOAST via sooner in shadCn- alaert and showing bar while uploading and stuffs.
+
+3. Authentication adn Autharization(Clerk)
+
+        via Clerk , used only gmail Autharization and Authentication, it created it personalised installation and promted us to created the sign-in and sign-out speciifc file based routing page.tsx files, which will get rendered at the respective routes:
+
+        so sign-in and sign-out must also be engineered by us , as when those 2 paths will get activated, therefore we used the HEader section andn LINK comonent to navigate to /sign-in and /sign-up page.
+
+4. Uploads PDF via UplaodThing.
+
+5. LANGCHAIN - (Extract and load the pdf on langchain )
+
+        *lib/langchain.ts====>
+        *actions/uplaod-actions.ts ===> 
+        *uplaod-form.ts====> necessary adjustment and extraction and saving pdfs.
+
+        //BASICALLYYY  geting PDF content via LANG-CHAIN 
+
