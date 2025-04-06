@@ -138,7 +138,10 @@
   button {
     @apply hover:cursor-pointer bg-rose-600 hover:bg-rose-700;
   }
-  
+  .animate-gradientx {
+    animation: gradient-x 3s ease infinite;
+
+  }
 }
 
 /* additional container utility used for styling the container */
