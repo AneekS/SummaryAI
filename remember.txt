@@ -26,3 +26,6 @@
 
         //BASICALLYYY  geting PDF content via LANG-CHAIN 
 
+6. OPEN_AI call
+    *lib/openai.ts.
+    

@@ -14,10 +14,10 @@ export default function Page() {
                         <UploadHeader />
                         <UploadForm />
                     </div>
-                    <div className="flex flex-col justify-center items-center gap-6">
+                    {/* <div className="flex flex-col justify-center items-center gap-6">
                         <UploadQuestionHeader></UploadQuestionHeader>
                         <UploadQuestionForm />
-                    </div>
+                    </div> */}
             </div>
           </div>
         </div>

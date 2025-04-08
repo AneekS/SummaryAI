@@ -1,6 +1,6 @@
 "use client"
 import {z} from "zod"
-import UploadFormInputs from "./upload-form-inputs"
+import UploadFormInput from "./upload-form-inputs";
 import { toast } from "sonner";
 import { generatePdfSummary } from "@/actions/upload-actions";
 // will get dispalyed in upload/page.tsx section
@@ -8,6 +8,7 @@ import { generatePdfSummary } from "@/actions/upload-actions";
 
 //function and main working , under the hood of pdf and extracting ait and applyinng all api powerd prompts.
 import { useUploadThing } from "@/utils/uploadthing"
+import { useRef } from "react";
 const schema= z.object({
     file: z.instanceof(File,{message:'Invalid File'}).refine((file)=>file.size
         <= 24*1024*1024, {message: 'File size should be less than 24MB',}
@@ -17,6 +18,8 @@ const schema= z.object({
 
 // after uploading checking function under the hood.
 export default  function UploadForm(){
+
+    const formRef = useRef<HTMLFormElement>(null)
     //hook1 - toast -- UI enhancer.
     //hook2 -useUploadThing()-- uplaod the pdf.
     const { startUpload, routeConfig } = useUploadThing("pdfUploader", {
@@ -66,13 +69,17 @@ export default  function UploadForm(){
 
     //Step 2: LangChain
     //parse the pdf using lang chain
-    const summary= await generatePdfSummary(resp);
-    console.log({summary});
+    const result = await generatePdfSummary(resp);
+const {data = null , message=null}= result || {};
+    if(data){
+      toast("Saving PDF......",{description:"Hang tight! Our AI is saving your summary"});
+      formRef.current?.reset();
+    }
 
     //STEP 3 - chatGpr /gemmini for summarize the pdf.
     //summarize the pdf using ai
 
-    
+     
     //save the summary to the database
     //redirect to the [id] summary page
 
@@ -85,6 +92,6 @@ export default  function UploadForm(){
     //Dsipaly part 
     // main rendered part
     return <div className="flex flex-col gap-8 w-full max-w-2xl mx-auto">
-         <UploadFormInputs onSubmit={handleSubmit}></UploadFormInputs> 
+         <UploadFormInput ref={formRef} onSubmit={handleSubmit}></UploadFormInput> 
     </div>
 }

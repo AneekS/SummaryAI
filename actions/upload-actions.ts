@@ -1,8 +1,8 @@
 'use server'
 // LANGCHAIN related 
 import { fetchAndExtractPdfText } from "@/lib/langchain";
-
-
+import { generateSummaryFromOpenAI } from "@/lib/openai";
+import { generateSummaryFromGemini } from "@/lib/geminiai";
 // Uses the function fetchAndExtractPdfText(pdfUrl) to download the PDF from the server and extract its raw text content.
 export async function generatePdfSummary(uploadResponse: [{
   serverData: {
@@ -40,6 +40,7 @@ export async function generatePdfSummary(uploadResponse: [{
     const pdfText = await fetchAndExtractPdfText(pdfUrl);
     console.log({pdfText});
     let summary;
+    // generate from OPEN AI
     try{
       summary=await generateSummaryFromOpenAI(pdfText);
       console.log({summary});
